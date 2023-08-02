@@ -17,11 +17,23 @@ model Format {
 }
 
 model Movie {
-  id       Int      @id @default(autoincrement())
-  image    String
-  title    String
-  type     String
-  duration String
-  rank     String
-  formats  Format[]
+  id          Int      @id @default(autoincrement())
+  image       String
+  title       String
+  type        String
+  duration    String
+  rank        String
+  description String
+  cast        String
+  director    String
+  formats     Format[]
+  days        Day[]
+}
+
+model Day {
+  id      Int      @id @default(autoincrement())
+  date    String
+  weekday String
+  time    String[]
+  movies  Movie[] // Relacionamento com filmes exibidos no dia
 }
