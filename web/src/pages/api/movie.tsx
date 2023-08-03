@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try{
     if (method === "POST") {
       const { image, title, type, duration, rank, formats, description, cast, director, days } = req.body;
-
+      
       const newMovie = await prisma.movie.create({
         data: {
           image,
@@ -20,15 +20,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           cast,
           director,
           formats: {
-            connect: formats.map((formatTitle: string) => ({ formatTitle: formatTitle}))
+            connect: formats.map((idFormat: number) => ({ id: idFormat}))
           },
           days: { 
-            connect: days.map((id: number) => ({id: id}))
+            connect: days.map((idDay: number) => ({ id: idDay }))
           }
         },
         include: {
           formats: true, 
-          days: true // Para incluir os detalhes dos formatos no resultado
+          days: true 
         },
       });
 
@@ -38,9 +38,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const movies = await prisma.movie.findMany({
           include: {
             formats: true,
-            days: true // Para incluir os detalhes dos formatos no resultado
+            days: true
           },
         });
+        
         res.status(200).json(movies);
       } else {
         res.setHeader("Allow", ["POST"]);
