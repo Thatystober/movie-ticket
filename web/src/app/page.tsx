@@ -1,8 +1,8 @@
 "use client";
 import { Movie, MovieProps } from '@/components/Movie';
-import ImageMovie from "../assets/movie.png";
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/axios';
+
 export default function Home() {
   const [movies, setMovies] = useState<MovieProps[]>([]);
   const [loading, setLoading] = useState(true);
@@ -10,9 +10,9 @@ export default function Home() {
   
   useEffect(() => {
     api
-      .get('/api/movie') // Assuming the API endpoint to fetch movies is /api/movies
+      .get('/api/movie')
       .then((response) => {
-        setMovies(response.data); // Assuming the API returns an array of movie objects
+        setMovies(response.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -34,8 +34,8 @@ export default function Home() {
     <div className='container mx-auto grid grid-cols-3 gap-8'>
       {movies.map((movie) => (
         <Movie
-          key={movie.id} // Make sure to provide a unique key for each movie
-          image={movie.image} // Replace with the actual movie image URL from the API response
+          key={movie.id} 
+          image={movie.image}
           title={movie.title}
           type={movie.type}
           duration={movie.duration}
@@ -45,11 +45,12 @@ export default function Home() {
           director={movie.director}
           formats={movie.formats}
           day={movie.day}
+          path={`/movies/${movie.id}`}
         />
       ))}
-
+[[
       {/* <Movie src={ImageMovie} title="Homem Aranha" type="Ação" duration="144 min" formats={["LEG", "DUB"]} rank={"10"} />
-      <Movie src={ImageMovie} title="Homem Aranha" type="Ação" duration="144 min" formats={["LEG", "3D"]} rank={"10"}/> */}
+      <Movie src={ImageMovie} title="Homem Aranha" type="Ação" duration="144 min" formats={["LEG", "3D"]} rank={"10"}/> */}]]
     </div>
   )
 }

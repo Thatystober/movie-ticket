@@ -11,7 +11,7 @@ export function Rank({valueRank}: RankProps){
     : 'bg-neutral-950';
 
   return (
-    <div className={`${bgColorClass} w-8 mt-4 rounded`}>
+    <div className={`${bgColorClass} w-8 rounded h-7`}>
       <p className="uppercase text-center flex justify-center items-center h-full">{valueRank}</p>
     </div>
   )
