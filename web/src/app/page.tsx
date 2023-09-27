@@ -2,6 +2,7 @@
 import { Movie, MovieProps } from '@/components/Movie';
 import { useEffect, useState } from 'react';
 import { api } from '@/lib/axios';
+import RootLayout from './layout';
 
 export default function Home() {
   const [movies, setMovies] = useState<MovieProps[]>([]);
@@ -31,9 +32,10 @@ export default function Home() {
   }
   
   return (
-    <div className='container mx-auto grid grid-cols-3 gap-8'>
-      {movies.map((movie) => (
-        <Movie
+    <RootLayout>
+      <div className='container mx-auto grid grid-cols-3 gap-8'>
+        {movies.map((movie) => (
+          <Movie
           key={movie.id} 
           image={movie.image}
           title={movie.title}
@@ -46,11 +48,9 @@ export default function Home() {
           formats={movie.formats}
           day={movie.day}
           path={`/movies/${movie.id}`}
-        />
-      ))}
-[[
-      {/* <Movie src={ImageMovie} title="Homem Aranha" type="Ação" duration="144 min" formats={["LEG", "DUB"]} rank={"10"} />
-      <Movie src={ImageMovie} title="Homem Aranha" type="Ação" duration="144 min" formats={["LEG", "3D"]} rank={"10"}/> */}]]
-    </div>
+          />
+          ))}
+      </div>
+    </RootLayout>
   )
 }

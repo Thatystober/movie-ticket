@@ -38,12 +38,13 @@ export function Movie({
 }: MovieProps ){
 
   return(
-    <div className='py-8 px-4 border-gray-800 border-2 rounded-md flex gap-8 align-top'>
+    <div className='py-8 px-4 border-gray-800 border-2 rounded-md flex gap-8 align-top' key={id}>
       <Image src={image} 
         alt="Movie Image"
         width={150}
         height={48}
         priority
+        className='object-cover'
       />
 
       <div className='w-full flex justify-between flex-col'>
